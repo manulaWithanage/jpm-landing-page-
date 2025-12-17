@@ -1,5 +1,6 @@
 import React from 'react';
-import { FileText, CheckCircle, ArrowRight, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FileText, CheckCircle, ArrowRight, Briefcase } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
@@ -45,14 +46,14 @@ const Hero: React.FC = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-           <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 flex items-center justify-center gap-3 ring-4 ring-blue-600/10">
+           <Link to="/pricing" className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 flex items-center justify-center gap-3 ring-4 ring-blue-600/10">
               <FileText className="w-5 h-5" />
               Build My Resume
-           </button>
-           <button className="w-full sm:w-auto px-8 py-4 bg-white/80 backdrop-blur-sm hover:bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-md hover:shadow-lg">
-              <Play className="w-5 h-5 text-slate-400 fill-slate-400" />
-              Watch Demo
-           </button>
+           </Link>
+           <Link to="/jobs" className="w-full sm:w-auto px-8 py-4 bg-white/80 backdrop-blur-sm hover:bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-md hover:shadow-lg">
+              <Briefcase className="w-5 h-5 text-slate-400" />
+              Browse Jobs
+           </Link>
         </div>
 
         {/* Trusted By Section - Re-added */}
@@ -108,15 +109,6 @@ const Hero: React.FC = () => {
                         <div className="text-left">
                             <p className="text-sm md:text-base font-bold text-slate-900">Resume Optimized</p>
                             <p className="text-xs md:text-sm text-slate-500">Ready for download</p>
-                        </div>
-                    </div>
-                    
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-                        <div className="w-16 h-16 md:w-24 md:h-24 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-300 border border-white/50">
-                             <div className="w-14 h-14 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-inner">
-                                <Play className="w-6 h-6 md:w-8 md:h-8 text-blue-600 fill-blue-600 ml-1" />
-                             </div>
                         </div>
                     </div>
                 </div>

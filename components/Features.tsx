@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Layout, FileText, Sparkles, Send, PenTool, X, Zap, CheckCircle, ChevronDown, TrendingUp, Filter, Bell, UserPlus, LogOut, Globe, Search } from 'lucide-react';
 
 interface FeaturesProps {
-  onNavigate: (page: string, hash?: string) => void;
+    onNavigate: (page: string, hash?: string) => void;
 }
 
 const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
@@ -11,6 +12,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -345,39 +347,50 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
       body: "Turn your resume and a job description into a persuasive, tailored cover letter instantly.",
       btnText: "Draft Letter",
       graphic: (
-        <div className="relative w-full h-full flex items-center justify-center scale-90">
-            {/* Doc 1 */}
-            <div className="absolute left-4 top-4 w-12 h-16 bg-white border border-slate-200 shadow-sm rounded p-1 transform -rotate-6 z-0">
-                <div className="space-y-1">
-                    <div className="h-1 bg-slate-200 w-1/2 rounded"></div>
-                    <div className="h-0.5 bg-slate-100 w-full rounded"></div>
-                    <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 w-full h-full overflow-hidden relative flex flex-col">
+            <div className="flex items-center justify-between p-2 border-b border-slate-100 bg-slate-50/50">
+                <div className="flex gap-1.5">
+                   <div className="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
                 </div>
+                <div className="text-[6px] font-bold text-slate-300 uppercase tracking-widest">Writer</div>
             </div>
-            {/* Doc 2 */}
-            <div className="absolute right-4 top-4 w-12 h-16 bg-white border border-slate-200 shadow-sm rounded p-1 transform rotate-6 z-0">
-                <div className="space-y-1">
-                    <div className="h-1 bg-blue-100 w-1/2 rounded"></div>
-                    <div className="h-0.5 bg-slate-100 w-full rounded"></div>
-                    <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+            <div className="flex-1 relative bg-slate-50/30 w-full flex items-center justify-center">
+                 <div className="relative w-full h-full flex items-center justify-center scale-90">
+                    {/* Doc 1 */}
+                    <div className="absolute left-4 top-4 w-12 h-16 bg-white border border-slate-200 shadow-sm rounded p-1 transform -rotate-6 z-0">
+                        <div className="space-y-1">
+                            <div className="h-1 bg-slate-200 w-1/2 rounded"></div>
+                            <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+                            <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+                        </div>
+                    </div>
+                    {/* Doc 2 */}
+                    <div className="absolute right-4 top-4 w-12 h-16 bg-white border border-slate-200 shadow-sm rounded p-1 transform rotate-6 z-0">
+                        <div className="space-y-1">
+                            <div className="h-1 bg-blue-100 w-1/2 rounded"></div>
+                            <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+                            <div className="h-0.5 bg-slate-100 w-full rounded"></div>
+                        </div>
+                    </div>
+                    {/* Arrow */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow-md">
+                        <ArrowRight size={12} className="text-cyan-500" />
+                    </div>
+                    {/* Final Doc */}
+                    <div className="absolute bottom-1 w-20 h-24 bg-white border border-slate-200 shadow-lg rounded-lg p-2 z-20 flex flex-col">
+                        <div className="flex justify-between items-center mb-1">
+                            <div className="w-4 h-4 bg-cyan-100 rounded-full flex items-center justify-center"><PenTool size={6} className="text-cyan-600" /></div>
+                        </div>
+                        <div className="space-y-1">
+                            <div className="h-1 bg-slate-800 w-1/3 rounded"></div>
+                            <div className="h-0.5 bg-slate-200 w-full rounded"></div>
+                            <div className="h-0.5 bg-slate-200 w-full rounded"></div>
+                            <div className="h-0.5 bg-slate-200 w-full rounded"></div>
+                        </div>
+                        <div className="mt-auto self-end text-[6px] font-bold text-cyan-600 bg-cyan-50 px-1 rounded">Perfect</div>
+                    </div>
                 </div>
-            </div>
-            {/* Arrow */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow-md">
-                <ArrowRight size={12} className="text-cyan-500" />
-            </div>
-            {/* Final Doc */}
-            <div className="absolute bottom-2 w-20 h-24 bg-white border border-slate-200 shadow-lg rounded-lg p-2 z-20 flex flex-col">
-                <div className="flex justify-between items-center mb-1">
-                    <div className="w-4 h-4 bg-cyan-100 rounded-full flex items-center justify-center"><PenTool size={6} className="text-cyan-600" /></div>
-                </div>
-                <div className="space-y-1">
-                    <div className="h-1 bg-slate-800 w-1/3 rounded"></div>
-                    <div className="h-0.5 bg-slate-200 w-full rounded"></div>
-                    <div className="h-0.5 bg-slate-200 w-full rounded"></div>
-                    <div className="h-0.5 bg-slate-200 w-full rounded"></div>
-                </div>
-                <div className="mt-auto self-end text-[6px] font-bold text-cyan-600 bg-cyan-50 px-1 rounded">Perfect</div>
             </div>
         </div>
       )
@@ -513,6 +526,16 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
     setIsPaused(true);
   };
 
+  // Wrapper for navigation
+  const handleNavigate = (id: string) => {
+      navigate('/features#' + id);
+      // Fallback manual scroll if already on features page (since router might not trigger re-render of same component)
+      setTimeout(() => {
+         const el = document.getElementById(id);
+         if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+  };
+
   return (
     <section id="features" className="py-24 bg-slate-50 relative overflow-hidden">
       <style>{`
@@ -550,7 +573,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
         {[...features, ...features].map((feature, index) => (
           <div 
             key={index} 
-            className="min-w-[300px] md:min-w-[340px] bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col h-[500px] hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex-shrink-0 group"
+            className="w-[320px] md:w-[360px] bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col h-[520px] hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex-shrink-0 group"
           >
             {/* Top Content */}
             <div className="mb-6">
@@ -572,7 +595,7 @@ const Features: React.FC<FeaturesProps> = ({ onNavigate }) => {
 
             {/* Action Button */}
             <button 
-              onClick={() => onNavigate('features', feature.id)}
+              onClick={() => handleNavigate(feature.id)}
               className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all shadow-sm"
             >
               {feature.btnText} <ArrowRight size={16} />

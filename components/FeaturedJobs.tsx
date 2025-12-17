@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight, Building2, Globe, Clock, Bookmark, DollarSign, Briefcase, Search } from 'lucide-react';
 
 const FeaturedJobs: React.FC = () => {
@@ -142,10 +143,10 @@ const FeaturedJobs: React.FC = () => {
 
         {/* View All Button */}
         <div className="flex justify-center">
-          <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-blue-600 rounded-full hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
+          <Link to="/jobs" className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-blue-600 rounded-full hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
             <span>View All Openings</span>
             <Search className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:scale-110" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

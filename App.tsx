@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PricingPage from './pages/PricingPage';
@@ -9,49 +10,55 @@ import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BookTimePage from './pages/BookTimePage';
+import JobBoardPage from './pages/JobBoardPage';
 import Footer from './components/Footer';
 
-const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState('home');
+// Scroll handling wrapper
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
 
-  const handleNavigate = (page: string, hash?: string) => {
-    setCurrentPage(page);
-    window.scrollTo(0, 0);
-    
-    // If there's a hash, we set it so the page can handle it after render
+  useEffect(() => {
     if (hash) {
-      // Use setTimeout to allow the page render to complete before scrolling
       setTimeout(() => {
-         const element = document.getElementById(hash);
-         if (element) {
-             element.scrollIntoView({ behavior: 'smooth' });
-         }
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 100);
-      window.location.hash = hash;
     } else {
-      // Clear hash if just navigating to top of a page
-      history.pushState("", document.title, window.location.pathname + window.location.search);
+      window.scrollTo(0, 0);
     }
-  };
+  }, [pathname, hash]);
 
+  return null;
+};
+
+const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 overflow-x-hidden">
-      <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-      
-      <main>
-        {currentPage === 'home' && <Home onNavigate={handleNavigate} />}
-        {currentPage === 'pricing' && <PricingPage />}
-        {currentPage === 'features' && <FeaturesPage />}
-        {currentPage === 'about' && <AboutPage />}
-        {currentPage === 'blog' && <BlogPage />}
-        {currentPage === 'contact' && <ContactPage />}
-        {currentPage === 'privacy' && <PrivacyPage />}
-        {currentPage === 'terms' && <TermsPage />}
-        {currentPage === 'book-time' && <BookTimePage />}
-      </main>
-      
-      <Footer onNavigate={handleNavigate} />
-    </div>
+    <HashRouter>
+      <div className="min-h-screen bg-slate-50 text-slate-800 overflow-x-hidden flex flex-col">
+        <ScrollToTop />
+        <Navbar />
+        
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/jobs" element={<JobBoardPage />} />
+            <Route path="/jobs/:jobId" element={<JobBoardPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/book-time" element={<BookTimePage />} />
+          </Routes>
+        </main>
+        
+        <Footer />
+      </div>
+    </HashRouter>
   );
 };
 
