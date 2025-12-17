@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import BookTimeModal from './BookTimeModal';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isBookTimeOpen, setIsBookTimeOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,6 +34,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
+    <>
     <div className="fixed top-6 inset-x-0 z-50 flex flex-col items-center px-4 sm:px-6 transition-all duration-300">
       <nav 
         className={`w-full max-w-6xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] border border-white/30 shadow-xl rounded-full px-8 pl-10 pr-8 sm:px-10 py-5 flex items-center justify-between
@@ -71,12 +74,12 @@ const Navbar: React.FC = () => {
         {/* Desktop CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
           <Link to="#" className="text-base font-bold text-slate-700 hover:text-blue-600 px-5 py-3 transition-colors">Login</Link>
-          <Link 
-            to="/book-time" 
+          <button 
+            onClick={() => setIsBookTimeOpen(true)}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-full text-base font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
             Book Time
-          </Link>
+          </button>
         </div>
 
         {/* Mobile menu button */}
@@ -120,17 +123,21 @@ const Navbar: React.FC = () => {
            
            <div className="flex flex-col gap-4">
               <Link to="#" className="w-full text-center text-lg font-bold text-slate-600 py-3 hover:text-blue-600 transition-colors">Login</Link>
-              <Link 
-                to="/book-time" 
-                onClick={() => setIsOpen(false)}
+              <button 
+                onClick={() => {
+                    setIsOpen(false);
+                    setIsBookTimeOpen(true);
+                }}
                 className="w-full bg-blue-600 text-white text-center text-lg font-bold py-4 rounded-2xl shadow-lg hover:bg-blue-700 transition-all"
               >
                 Book Time
-              </Link>
+              </button>
            </div>
         </div>
       )}
     </div>
+    <BookTimeModal isOpen={isBookTimeOpen} onClose={() => setIsBookTimeOpen(false)} />
+    </>
   );
 };
 
